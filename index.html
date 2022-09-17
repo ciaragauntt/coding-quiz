@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8"/>
+    <title>Coding Quiz</title>
+
+    <link rel="stylesheet" href="./CSS/style.css" />
+</head>
+
+<body>
+    <div class="high-score"><a href="score.html">View Highscores</a></div>
+
+    <div class="timer">Time: <span id="timer">0</span></div>
+
+    <div class="wrapper">
+        <div id="start" class="start-screen">
+            <h1>Coding Quiz</h1>
+            <p>
+                Time to practice for a technical interview! Answer each question to the best of you knowledge!
+                Note: Each incorrect answer will result in a 10 second score/time penalty!
+            </p>
+            <button id="start-button">Start Quiz</button>
+        </div>
+
+        <div id="questions" class="hide">
+            <h2 id="question-title"></h2>
+            <div id="choices" class="choices"></div>
+        </div>
+
+        <div id="end-screen" class="hide">
+            <h2>Finished!</h2>
+            <p>Final Score: <span id="final-score"></span></p>
+            <p>
+                Enter Name: <input type="text" id="name"/>
+                <button id="submit">Submit</button>
+            </p>
+        </div>
+
+        <div id="feedback" class="feedback hide"></div>
+    </div>
+
+    <script src="./Javascript/questions.js"></script>
+    <script src="./Javascript/script.js"></script>
+</body>
+</html>
