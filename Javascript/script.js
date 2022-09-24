@@ -6,6 +6,8 @@ var submitButton = document.querySelector("#submit");
 var startButton = document.querySelector("#start-button");
 var nameEl = document.querySelector("#name");
 var feedbackEl = document.querySelector("#feedback");
+var startEl = document.querySelector("#start-screen");
+var endEl = document.querySelector("#end-screen");
 
 var questionIndex = 0;
 var time = questions.length * 15;
@@ -13,12 +15,12 @@ var timerId;
 
 // Start the quiz
 function startQuiz() {
-    var startEl = document.getElementById("start-screen");
+
     startEl.setAttribute("class", "hide");
 
     questionsEl.removeAttribute("class");
 
-    timerId = setInterval(clockTick, 1000);
+    timerId = setInterval(clocktick, 1000);
 
     timerEl.textContent = time;
 
@@ -41,20 +43,20 @@ function getQuestion() {
 
         choiceBtn.textContent = i + 1 + ". " + choice;
 
-        choiceBtn.onClick = questionClick;
+        choiceBtn.onclick = answerQuestion;
 
         choicesEl.appendChild(choiceBtn);
     });
 }
 
 // Second being taken off the clock
-function tick() {
+function clocktick() {
     // update the time 
     time --;
     timerEl.textContent = time;
     // if the user ran out of time 
     if (time < 0) {
-        quizEnd();
+        endQuiz();
     }
 }
 
@@ -82,7 +84,7 @@ function answerQuestion () {
 
     feedbackEl.setAttribute("class", "feedback");
 
-    sertTimeout(function () {
+    setTimeout(function () {
         feedbackEl.setAttribute("class", "feedback hide");
     }, 1000);
 
@@ -91,10 +93,11 @@ function answerQuestion () {
 
     // make sure we did not run out of questions 
     if (questionIndex === questions.length) {
-        quizEnd();
+        endQuiz();
     } else {
         getQuestion();
     }
+
 }
 
 // end the quiz
@@ -112,7 +115,7 @@ function answerQuestion () {
         finalScore.textContent = time;
 
         //hide questions
-        startEl.setAttribute("class", "hide");
+        questionsEl.setAttribute("class", "hide");
     }
 
     function saveScore () {
@@ -121,15 +124,15 @@ function answerQuestion () {
         var name = nameEl.value.trim();
 
         if (name !== "") {
-            var highscore = JSON.parse(window.localStorage.getItem("high-score")) || [];
+            var highscore = JSON.parse(window.localStorage.getItem("high-scores")) || [];
 
             var newScore = {
                 score: time,
-                name: nameEl
+                name: name
             };
 
             highscore.push(newScore);
-            window.localStorage.setItem("high-score", JSON.stringify(highscore));
+            window.localStorage.setItem("high-scores", JSON.stringify(highscore));
 
             window.location.href = "score.html";
         }
@@ -140,6 +143,7 @@ function answerQuestion () {
             saveScore();
         }
     }
+    
 
     submitButton.onclick = saveScore;
 

@@ -1,0 +1,13 @@
+h1{
+    text-align: center;
+    color: cyan;
+}
+#high-scores{
+    display: block;
+}
+.clearScores{
+    display: block;
+    margin: 0 auto;
+    background-color:rgb(255, 92, 173);
+    background-image: var(--bs-gradient);
+}
